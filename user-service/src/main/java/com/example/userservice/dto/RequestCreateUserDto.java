@@ -4,6 +4,7 @@ import com.example.userservice.domain.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -24,10 +25,15 @@ public class RequestCreateUserDto {
 
     private String userId;
 
+    //필요하다면 구매내역을 같이 가져올 수 있도록 처리함.
+//    private List<Order> orderList;
+
     public User toEntity(){
+        //암호화 비밀번호 저장을 위한 BCryptPasswordEncoder
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return User.builder()
                 .email(this.email)
-                .encPw(this.pw)
+                .encPw(bCryptPasswordEncoder.encode(this.pw))
                 .userId(this.userId)
                 .name(this.name)
                 .uuid(UUID.randomUUID().toString())

@@ -1,6 +1,5 @@
 package com.example.userservice.controller;
 
-import com.example.userservice.domain.User;
 import com.example.userservice.dto.RequestCreateUserDto;
 import com.example.userservice.dto.ResponseFindUserDto;
 import com.example.userservice.service.UserService;
@@ -8,6 +7,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("user-service")
@@ -30,5 +31,10 @@ public class UserController {
     public ResponseEntity<?> findUser(@PathVariable String uuid){
         ResponseFindUserDto userDto = userService.findUser(uuid);
         return ResponseEntity.ok(userDto.toString());
+    }
+
+    @GetMapping("findAll")
+    public ResponseEntity<?> findAll(){
+        return ResponseEntity.ok(userService.findAll());
     }
 }

@@ -16,6 +16,8 @@ public class ResponseFindUserDto {
 
     private String uuid;
 
+//    private List<Order> orderList;
+
     public ResponseFindUserDto(User user){
         this.email = user.getEmail();
         this.name = user.getName();
