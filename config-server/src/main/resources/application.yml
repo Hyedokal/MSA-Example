@@ -1,6 +1,0 @@
-spring:
-  cloud:
-    config:
-      server:
-        git:
-          uri: file://C:\Users\1\Desktop\MSA-Backend\msa_example\config-server
