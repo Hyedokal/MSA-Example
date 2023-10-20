@@ -5,6 +5,7 @@ import com.example.userservice.dto.ResponseFindUserDto;
 import com.example.userservice.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final Environment env;
 
     @RequestMapping("health-check")
     public String healthCheck(){
@@ -36,5 +38,12 @@ public class UserController {
     @GetMapping("findAll")
     public ResponseEntity<?> findAll(){
         return ResponseEntity.ok(userService.findAll());
+    }
+
+    @GetMapping("port-check")
+    public String portCheck(){
+        return env.getProperty("local.server.port")
+                + "/"
+                + env.getProperty("test.value");
     }
 }
